@@ -17,10 +17,10 @@ class MemeCollectionViewController: UIViewController, UICollectionViewDataSource
     
     func plusButtonTapped(sender:AnyObject)
     {
-        
+        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("MemeEditorViewController") as! MemeEditorViewController
+        self.presentViewController(vc, animated: true, completion: nil)
     }
     
-    // MARK: Table View Data Source
     override func viewWillAppear(animated: Bool)
     {
         super.viewWillAppear(animated)

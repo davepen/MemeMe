@@ -9,7 +9,7 @@
         <!--Meme Editor View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="MemeEditorViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MemeEditorViewController" id="vXZ-lx-hvc" customClass="MemeEditorViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -47,7 +47,7 @@
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" title="Cancel" id="gnf-tC-jhR">
                                             <connections>
-                                                <segue destination="alv-bA-sL5" kind="show" id="2AB-Eb-ibE"/>
+                                                <segue destination="alv-bA-sL5" kind="showDetail" id="jRS-Wa-sgW"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -124,22 +124,22 @@
                                 <exclude reference="xgo-3h-mee"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="dAc-em-XPh"/>
-                                <exclude reference="Qth-Ys-X9Z"/>
-                                <exclude reference="R15-lT-9EZ"/>
-                                <exclude reference="X5B-UF-qrj"/>
-                                <exclude reference="hAN-ys-MwQ"/>
-                                <exclude reference="vMu-0z-ViR"/>
                                 <exclude reference="8Wg-fn-R2R"/>
                                 <exclude reference="N1K-wq-SD2"/>
                                 <exclude reference="rIn-yS-Zge"/>
                                 <exclude reference="kyE-zv-QYd"/>
+                                <exclude reference="dAc-em-XPh"/>
                                 <exclude reference="AeV-5B-SxB"/>
                                 <exclude reference="EhL-nF-WS3"/>
                                 <exclude reference="G2b-4q-M9Q"/>
                                 <exclude reference="KuN-HI-jwh"/>
                                 <exclude reference="yn5-zx-Hs5"/>
                                 <exclude reference="zEg-nq-tmB"/>
+                                <exclude reference="Qth-Ys-X9Z"/>
+                                <exclude reference="R15-lT-9EZ"/>
+                                <exclude reference="X5B-UF-qrj"/>
+                                <exclude reference="hAN-ys-MwQ"/>
+                                <exclude reference="vMu-0z-ViR"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -151,22 +151,22 @@
                                 <include reference="xgo-3h-mee"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="dAc-em-XPh"/>
-                                <include reference="Qth-Ys-X9Z"/>
-                                <include reference="R15-lT-9EZ"/>
-                                <include reference="X5B-UF-qrj"/>
-                                <include reference="hAN-ys-MwQ"/>
-                                <include reference="vMu-0z-ViR"/>
                                 <include reference="8Wg-fn-R2R"/>
                                 <include reference="N1K-wq-SD2"/>
                                 <include reference="rIn-yS-Zge"/>
                                 <include reference="kyE-zv-QYd"/>
+                                <include reference="dAc-em-XPh"/>
                                 <include reference="AeV-5B-SxB"/>
                                 <include reference="EhL-nF-WS3"/>
                                 <include reference="G2b-4q-M9Q"/>
                                 <include reference="KuN-HI-jwh"/>
                                 <include reference="yn5-zx-Hs5"/>
                                 <include reference="zEg-nq-tmB"/>
+                                <include reference="Qth-Ys-X9Z"/>
+                                <include reference="R15-lT-9EZ"/>
+                                <include reference="X5B-UF-qrj"/>
+                                <include reference="hAN-ys-MwQ"/>
+                                <include reference="vMu-0z-ViR"/>
                             </mask>
                         </variation>
                     </view>
@@ -192,6 +192,7 @@
                         <viewControllerLayoutGuide type="bottom" id="MoI-IG-8X8"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="aEy-wY-wP1">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ztu-2n-u1K">
@@ -219,7 +220,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oYw-ta-j02" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="742" y="-72"/>
+            <point key="canvasLocation" x="2844" y="934.5"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="89o-z4-NuF">
@@ -266,6 +267,7 @@
                         <viewControllerLayoutGuide type="bottom" id="5Y9-Ex-x4v"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="JFm-gf-Mie">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="jp4-o6-17Q">
@@ -341,6 +343,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Cq3-rL-8dm"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="WDA-zR-JgM">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="6nP-dX-8v5">

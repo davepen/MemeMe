@@ -7,8 +7,6 @@ class MemeTableViewController: UIViewController, UITableViewDataSource
     // This is an array of Villain instances
 //    let allVillains = Villain.allVillains
     
-    // MARK: Table View Data Source
-    
     override func viewDidLoad()
     {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem:UIBarButtonSystemItem.Add,
@@ -18,7 +16,8 @@ class MemeTableViewController: UIViewController, UITableViewDataSource
     
     func plusButtonTapped(sender:AnyObject)
     {
-        
+        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("MemeEditorViewController") as! MemeEditorViewController
+        self.presentViewController(vc, animated: true, completion: nil)
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
