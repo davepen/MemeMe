@@ -20,8 +20,10 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
             NSStrokeWidthAttributeName : -3.0
         ]
         
+        topTextField.enabled = false;
         topTextField.defaultTextAttributes = memeTextAttributes
         topTextField.textAlignment = NSTextAlignment.Center
+        bottomTextField.enabled = false
         bottomTextField.defaultTextAttributes = memeTextAttributes
         bottomTextField.textAlignment = NSTextAlignment.Center
     }
@@ -41,8 +43,19 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     @IBAction func shareButtonTapped(sender: UIBarButtonItem)
     {
+        self.save()
         let meme = (UIApplication.sharedApplication().delegate as! AppDelegate).memes.last! as Meme
         let activity = UIActivityViewController(activityItems: [meme.memedImage], applicationActivities: nil)
+        activity.completionWithItemsHandler = {
+            (activity, success, items, error) in
+            println("Activity: \(activity) Success: \(success) Items: \(items) Error: \(error)")
+            
+            if (success)
+            {
+                let vc = self.storyboard?.instantiateViewControllerWithIdentifier("SentMemesView") as! UITabBarController
+                self.presentViewController(vc, animated: true, completion: nil)
+            }
+        }
         self.presentViewController(activity, animated: true, completion: nil)
     }
     
@@ -99,8 +112,9 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage
         {
-            imageView.image = image
-            self.save()
+            self.imageView.image = image
+            self.topTextField.enabled = true
+            self.bottomTextField.enabled = true
             self.dismissViewControllerAnimated(true, completion: nil)
         }
     }

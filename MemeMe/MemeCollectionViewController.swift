@@ -4,9 +4,15 @@ import UIKit
 
 class MemeCollectionViewController: UIViewController, UICollectionViewDataSource
 {
-    // Get ahold of some villains, for the table
-    // This is an array of Villain instances
-//    let allVillains = Villain.allVillains
+    var memes:[Meme]!
+    
+    override func viewWillAppear(animated:Bool)
+    {
+        super.viewWillAppear(animated)
+        //self.tabBarController?.tabBar.hidden = false
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        memes = appDelegate.memes
+    }
     
     override func viewDidLoad()
     {
@@ -21,30 +27,20 @@ class MemeCollectionViewController: UIViewController, UICollectionViewDataSource
         self.presentViewController(vc, animated: true, completion: nil)
     }
     
-    override func viewWillAppear(animated: Bool)
-    {
-        super.viewWillAppear(animated)
-//        self.tabBarController?.tabBar.hidden = false
-    }
-    
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
-//        return self.allVillains.count
-        return 1;
+        return self.memes.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
     {
-
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("MemeCollectionViewCell", forIndexPath: indexPath) as! MemeCollectionViewCell
-        /*
-        let villain = self.allVillains[indexPath.row]
-        
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("MemeCollectionViewCell", forIndexPath:indexPath) as! MemeCollectionViewCell
+        let meme = self.memes[indexPath.row]
+        cell.imageView?.image = meme.memedImage
         // Set the name and image
-        cell.nameLabel.text = villain.name
-        cell.villainImageView?.image = UIImage(named: villain.imageName)
-        cell.schemeLabel.text = "Scheme: \(villain.evilScheme)"
-        */
+        //cell.nameLabel.text = villain.name
+        //cell.villainImageView?.image = UIImage(named: villain.imageName)
+        //cell.schemeLabel.text = "Scheme: \(villain.evilScheme)"
         return cell
     }
     
