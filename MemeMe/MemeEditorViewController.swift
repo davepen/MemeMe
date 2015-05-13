@@ -1,6 +1,6 @@
 import UIKit
 
-class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate
+class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate
 {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
@@ -23,15 +23,16 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         topTextField.enabled = false;
         topTextField.defaultTextAttributes = memeTextAttributes
         topTextField.textAlignment = NSTextAlignment.Center
+        topTextField.delegate = self
         bottomTextField.enabled = false
         bottomTextField.defaultTextAttributes = memeTextAttributes
         bottomTextField.textAlignment = NSTextAlignment.Center
+        bottomTextField.delegate = self
     }
 
     override func viewWillAppear(animated: Bool)
     {
         super.viewWillAppear(animated)
-        // Subscribe to keyboard notifications to allow the view to raise when necessary
         self.subscribeToKeyboardNotifications()
     }
     
@@ -45,7 +46,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     {
         self.save()
         let meme = (UIApplication.sharedApplication().delegate as! AppDelegate).memes.last! as Meme
-        let activity = UIActivityViewController(activityItems: [meme.memedImage], applicationActivities: nil)
+        let activity = UIActivityViewController(activityItems: [meme.memedImage!], applicationActivities: nil)
         activity.completionWithItemsHandler = {
             (activity, success, items, error) in
             println("Activity: \(activity) Success: \(success) Items: \(items) Error: \(error)")
@@ -65,6 +66,11 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
             selector: Selector("keyboardWillShow:"),
             name: UIKeyboardWillShowNotification,
             object: nil)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self,
+            selector: Selector("keyboardWillHide:"),
+            name: UIKeyboardWillHideNotification,
+            object: nil)
     }
     
     func unsubscribeFromKeyboardNotifications()
@@ -77,6 +83,14 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         super.didReceiveMemoryWarning()
     }
 
+    func keyboardWillHide(notification:NSNotification)
+    {
+        if bottomTextField.isFirstResponder()
+        {
+            self.view.frame.origin.y += getKeyboardHeight(notification)
+        }
+    }
+    
     func keyboardWillShow(notification: NSNotification)
     {
         if bottomTextField.isFirstResponder()
@@ -119,21 +133,22 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         }
     }
     
-    func save()
-    {
-        let memedImage = self.generateMemedImage()
-        let meme = Meme(topText:topTextField.text!,
-            bottomText:bottomTextField.text!,
-            image:imageView.image!,
-            memedImage:memedImage)
-        
-        // Add it to the memes array in the Application Delegate
-        (UIApplication.sharedApplication().delegate as! AppDelegate).memes.append(meme)
-    }
-    
     func imagePickerControllerDidCancel(picker: UIImagePickerController)
     {
         self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func save()
+    {
+        let memedImage = self.generateMemedImage()
+        let meme = Meme()
+        meme.topText = topTextField.text!
+        meme.bottomText = bottomTextField.text!
+        meme.image = imageView.image!
+        meme.memedImage = memedImage
+
+        // Add it to the memes array in the Application Delegate
+        (UIApplication.sharedApplication().delegate as! AppDelegate).memes.append(meme)
     }
     
     func generateMemedImage() -> UIImage
@@ -148,5 +163,11 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         
         // TODO:  Show toolbar and navbar
         return memedImage
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool
+    {
+        textField.resignFirstResponder()
+        return true;
     }
 }
