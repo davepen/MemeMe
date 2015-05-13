@@ -8,9 +8,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
     {
-        // Override point for customization after application launch.
+        // load our memes
         self.loadMemes()
-        println(memes.count)
+
+        // now decide what view to show first
+        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        let mainstoryboard = UIStoryboard(name:"Main", bundle:nil);
+        
+        self.window?.rootViewController = mainstoryboard.instantiateViewControllerWithIdentifier("SentMemesView") as? UITabBarController
+        self.window?.makeKeyAndVisible()
+        
+        if (self.memes.count == 0)
+        {
+            // start at the sent memes screen
+            let vc = mainstoryboard.instantiateViewControllerWithIdentifier("MemeEditorViewController") as! MemeEditorViewController
+            self.window?.rootViewController?.presentViewController(vc, animated: true, completion: nil);
+        }
+
         return true
     }
 
@@ -66,3 +80,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     }
 }
 
+extension AppDelegate
+{
+    static func getMemes() -> [Meme]
+    {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        return appDelegate.memes
+    }
+}

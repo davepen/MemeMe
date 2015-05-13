@@ -42,6 +42,11 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         self.unsubscribeFromKeyboardNotifications()
     }
     
+    @IBAction func cancelButtonTapped(sender: UIBarButtonItem)
+    {
+        self.dismissViewControllerAnimated(true, completion: nil);
+    }
+    
     @IBAction func shareButtonTapped(sender: UIBarButtonItem)
     {
         self.save()
@@ -53,8 +58,9 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
             
             if (success)
             {
-                let vc = self.storyboard?.instantiateViewControllerWithIdentifier("SentMemesView") as! UITabBarController
-                self.presentViewController(vc, animated: true, completion: nil)
+                self.dismissViewControllerAnimated(true, completion: nil);
+//                let vc = self.storyboard?.instantiateViewControllerWithIdentifier("SentMemesView") as! UITabBarController
+//                self.presentViewController(vc, animated: true, completion: nil)
             }
         }
         self.presentViewController(activity, animated: true, completion: nil)

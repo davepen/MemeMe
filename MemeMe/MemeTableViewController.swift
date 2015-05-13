@@ -3,12 +3,19 @@ import UIKit
 class MemeTableViewController: UIViewController, UITableViewDataSource
 {
     var memes:[Meme]!
+    var currentMemesCount:Int = 0
+
+    @IBOutlet weak var tableView: UITableView!
     
     override func viewWillAppear(animated:Bool)
     {
         super.viewWillAppear(animated)
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        memes = appDelegate.memes
+        memes = AppDelegate.getMemes()
+        if self.currentMemesCount < memes.count
+        {
+            self.currentMemesCount = memes.count
+            self.tableView.reloadData()
+        }
     }
     
     override func viewDidLoad()
@@ -16,6 +23,7 @@ class MemeTableViewController: UIViewController, UITableViewDataSource
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem:UIBarButtonSystemItem.Add,
                                                                               target:self,
                                                                               action:Selector("plusButtonTapped:"))
+        self.currentMemesCount = AppDelegate.getMemes().count
     }
     
     func plusButtonTapped(sender:AnyObject)

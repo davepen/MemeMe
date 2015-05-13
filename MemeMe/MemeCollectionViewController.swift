@@ -5,13 +5,19 @@ import UIKit
 class MemeCollectionViewController: UIViewController, UICollectionViewDataSource
 {
     var memes:[Meme]!
+    var currentMemesCount:Int = 0
+    
+    @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewWillAppear(animated:Bool)
     {
         super.viewWillAppear(animated)
-        //self.tabBarController?.tabBar.hidden = false
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        memes = appDelegate.memes
+        memes = AppDelegate.getMemes()
+        if self.currentMemesCount < memes.count
+        {
+            self.currentMemesCount = memes.count
+            self.collectionView.reloadData()
+        }
     }
     
     override func viewDidLoad()
@@ -19,6 +25,7 @@ class MemeCollectionViewController: UIViewController, UICollectionViewDataSource
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem:UIBarButtonSystemItem.Add,
             target:self,
             action:Selector("plusButtonTapped:"))
+        self.currentMemesCount = AppDelegate.getMemes().count
     }
     
     func plusButtonTapped(sender:AnyObject)

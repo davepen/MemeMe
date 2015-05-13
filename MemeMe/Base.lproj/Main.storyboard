@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -47,7 +47,7 @@
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" title="Cancel" id="gnf-tC-jhR">
                                             <connections>
-                                                <segue destination="alv-bA-sL5" kind="showDetail" id="jRS-Wa-sgW"/>
+                                                <action selector="cancelButtonTapped:" destination="vXZ-lx-hvc" id="8Hz-5v-a5f"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -364,6 +364,9 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Sent Memes" id="gJW-aY-ctK"/>
+                    <connections>
+                        <outlet property="collectionView" destination="jp4-o6-17Q" id="atj-c2-G1y"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wHl-J2-6v2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -443,6 +446,7 @@
                     <navigationItem key="navigationItem" title="Sent Memes" id="cAp-08-9BB"/>
                     <connections>
                         <outlet property="navigationItem" destination="cAp-08-9BB" id="N21-ye-ArB"/>
+                        <outlet property="tableView" destination="6nP-dX-8v5" id="EZM-WC-l4d"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NRX-6j-dAW" userLabel="First Responder" sceneMemberID="firstResponder"/>
