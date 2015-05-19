@@ -6,6 +6,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
+    @IBOutlet weak var toolbar: UIToolbar!
+    @IBOutlet weak var navigationBar: UINavigationBar!
 
     override func viewDidLoad()
     {
@@ -159,15 +161,20 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     func generateMemedImage() -> UIImage
     {
-        // TODO: Hide toolbar and navbar
+        // hide the toolbar and navigation bar
+        self.toolbar.hidden = true
+        self.navigationBar.hidden = true
         
         // render view to an image
         UIGraphicsBeginImageContext(self.view.frame.size)
         self.view.drawViewHierarchyInRect(self.view.frame, afterScreenUpdates: true)
         let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        
-        // TODO:  Show toolbar and navbar
+
+        // unhide the tooolbar and navigation bar
+        self.toolbar.hidden = false
+        self.navigationBar.hidden = false
+
         return memedImage
     }
     
