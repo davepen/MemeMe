@@ -24,6 +24,7 @@ class MemeTableViewController: UIViewController, UITableViewDataSource
                                                                               target:self,
                                                                               action:Selector("plusButtonTapped:"))
         self.currentMemesCount = AppDelegate.getMemes().count
+        self.tableView.separatorInset = UIEdgeInsetsZero
     }
     
     func plusButtonTapped(sender:AnyObject)
@@ -39,12 +40,12 @@ class MemeTableViewController: UIViewController, UITableViewDataSource
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCellWithIdentifier("MemeTableViewCell") as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("MemeTableViewCell") as! MemeTableViewCell
         let meme = self.memes[indexPath.row]
         
         // Set the name and image
-        cell.textLabel?.text = meme.topText! + meme.bottomText!
-        cell.imageView?.image = meme.memedImage
+        cell.memeCellLabel?.text = meme.topText! + meme.bottomText!
+        cell.memeCellImageView?.image = meme.memedImage
         
         return cell
     }
