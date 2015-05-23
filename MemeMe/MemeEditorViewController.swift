@@ -4,6 +4,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
+    @IBOutlet weak var shareButton: UIBarButtonItem!
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
     @IBOutlet weak var toolbar: UIToolbar!
@@ -13,7 +14,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     {
         super.viewDidLoad()
         
-        cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
+        self.shareButton.enabled = false
+        self.cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
         
         let memeTextAttributes = [
             NSStrokeColorAttributeName : UIColor.blackColor(),
@@ -30,6 +32,11 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         bottomTextField.defaultTextAttributes = memeTextAttributes
         bottomTextField.textAlignment = NSTextAlignment.Center
         bottomTextField.delegate = self
+    }
+    
+    override func prefersStatusBarHidden() -> Bool
+    {
+        return true;
     }
 
     override func viewWillAppear(animated: Bool)
@@ -61,8 +68,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
             if (success)
             {
                 self.dismissViewControllerAnimated(true, completion: nil);
-//                let vc = self.storyboard?.instantiateViewControllerWithIdentifier("SentMemesView") as! UITabBarController
-//                self.presentViewController(vc, animated: true, completion: nil)
             }
         }
         self.presentViewController(activity, animated: true, completion: nil)
@@ -86,11 +91,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
-    override func didReceiveMemoryWarning()
-    {
-        super.didReceiveMemoryWarning()
-    }
-
     func keyboardWillHide(notification:NSNotification)
     {
         if bottomTextField.isFirstResponder()
@@ -135,6 +135,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage
         {
             self.imageView.image = image
+            self.shareButton.enabled = true
             self.topTextField.enabled = true
             self.bottomTextField.enabled = true
             self.dismissViewControllerAnimated(true, completion: nil)
