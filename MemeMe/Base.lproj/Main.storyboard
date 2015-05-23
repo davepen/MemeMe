@@ -182,7 +182,7 @@
         <!--Collection View-->
         <scene sceneID="fxE-No-eKB">
             <objects>
-                <viewController title="Collection View" id="O8M-9P-3xA" customClass="MemeCollectionViewController" customModule="MemeMe" sceneMemberID="viewController">
+                <viewController title="Collection View" id="O8M-9P-3xA" customClass="MemeSentMemesViewController" customModule="MemeMe" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="KdT-55-oc9"/>
                         <viewControllerLayoutGuide type="bottom" id="5Y9-Ex-x4v"/>
@@ -269,7 +269,7 @@
         <!--Table View-->
         <scene sceneID="475-AV-qqG">
             <objects>
-                <viewController title="Table View" id="PyR-Aq-48J" customClass="MemeTableViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Table View" id="PyR-Aq-48J" customClass="MemeSentMemesViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="22n-e5-CFP"/>
                         <viewControllerLayoutGuide type="bottom" id="Cq3-rL-8dm"/>

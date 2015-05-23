@@ -51,6 +51,22 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         self.unsubscribeFromKeyboardNotifications()
     }
     
+    @IBAction func pickAnImageFromAlbum(sender: AnyObject)
+    {
+        let imagePicker = UIImagePickerController()
+        imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        imagePicker.delegate = self
+        self.presentViewController(imagePicker, animated: true, completion: nil)
+    }
+    
+    @IBAction func pickAnImageFromCamera(sender: AnyObject)
+    {
+        let imagePicker = UIImagePickerController()
+        imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
+        imagePicker.delegate = self
+        self.presentViewController(imagePicker, animated: true, completion: nil)
+    }
+
     @IBAction func cancelButtonTapped(sender: UIBarButtonItem)
     {
         self.dismissViewControllerAnimated(true, completion: nil);
@@ -110,24 +126,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     func getKeyboardHeight(notification: NSNotification) -> CGFloat
     {
         let userInfo = notification.userInfo
-        let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue // of CGRect
+        let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
         return keyboardSize.CGRectValue().height
-    }
-    
-    @IBAction func pickAnImageFromAlbum(sender: AnyObject)
-    {
-        let imagePicker = UIImagePickerController()
-        imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-        imagePicker.delegate = self
-        self.presentViewController(imagePicker, animated: true, completion: nil)
-    }
-    
-    @IBAction func pickAnImageFromCamera(sender: AnyObject)
-    {
-        let imagePicker = UIImagePickerController()
-        imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
-        imagePicker.delegate = self
-        self.presentViewController(imagePicker, animated: true, completion: nil)
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject])
@@ -160,6 +160,12 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         (UIApplication.sharedApplication().delegate as! AppDelegate).memes.append(meme)
     }
     
+    /**
+    Generates a UIImage using the view hierarchy. First hides the toolbar and navigation bar
+    and then unhides them.
+    
+    :returns: UIImage of the view hierarcchy.
+    */
     func generateMemedImage() -> UIImage
     {
         // hide the toolbar and navigation bar

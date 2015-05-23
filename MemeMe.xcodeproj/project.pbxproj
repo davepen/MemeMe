@@ -19,6 +19,7 @@
 		EE8878FC1AFD4252000B1450 /* Meme.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8878FB1AFD4252000B1450 /* Meme.swift */; };
 		EE8878FE1AFD6F41000B1450 /* MemeCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8878FD1AFD6F41000B1450 /* MemeCollectionViewController.swift */; };
 		EE8879001AFD712B000B1450 /* MemeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8878FF1AFD712A000B1450 /* MemeCollectionViewCell.swift */; };
+		EEC7F20B1B11009C00C4065C /* MemeSentMemesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC7F20A1B11009C00C4065C /* MemeSentMemesViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		EE8878FB1AFD4252000B1450 /* Meme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meme.swift; sourceTree = "<group>"; };
 		EE8878FD1AFD6F41000B1450 /* MemeCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemeCollectionViewController.swift; sourceTree = "<group>"; };
 		EE8878FF1AFD712A000B1450 /* MemeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemeCollectionViewCell.swift; sourceTree = "<group>"; };
+		EEC7F20A1B11009C00C4065C /* MemeSentMemesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemeSentMemesViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 				EE8878FB1AFD4252000B1450 /* Meme.swift */,
 				EE8878FF1AFD712A000B1450 /* MemeCollectionViewCell.swift */,
 				EE31FDAF1B0EF8CD00F1E978 /* MemeTableViewCell.swift */,
+				EEC7F20A1B11009C00C4065C /* MemeSentMemesViewController.swift */,
 			);
 			path = MemeMe;
 			sourceTree = "<group>";
@@ -179,6 +182,7 @@
 				TargetAttributes = {
 					EE72DA0E1AF1F81700517977 = {
 						CreatedOnToolsVersion = 6.3;
+						DevelopmentTeam = 25K25AAD6K;
 					};
 					EE72DA231AF1F81700517977 = {
 						CreatedOnToolsVersion = 6.3;
@@ -231,6 +235,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EE72DA171AF1F81700517977 /* MemeEditorViewController.swift in Sources */,
+				EEC7F20B1B11009C00C4065C /* MemeSentMemesViewController.swift in Sources */,
 				EE31FDB01B0EF8CD00F1E978 /* MemeTableViewCell.swift in Sources */,
 				EE72DA151AF1F81700517977 /* AppDelegate.swift in Sources */,
 				EE8878FC1AFD4252000B1450 /* Meme.swift in Sources */,
@@ -364,6 +369,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = MemeMe/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -374,6 +380,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = MemeMe/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -1,5 +1,4 @@
 import Foundation
-
 import UIKit
 
 class MemeCollectionViewController: UIViewController, UICollectionViewDataSource
@@ -44,10 +43,6 @@ class MemeCollectionViewController: UIViewController, UICollectionViewDataSource
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("MemeCollectionViewCell", forIndexPath:indexPath) as! MemeCollectionViewCell
         let meme = self.memes[indexPath.row]
         cell.imageView?.image = meme.memedImage
-        // Set the name and image
-        //cell.nameLabel.text = villain.name
-        //cell.villainImageView?.image = UIImage(named: villain.imageName)
-        //cell.schemeLabel.text = "Scheme: \(villain.evilScheme)"
         return cell
     }
     
