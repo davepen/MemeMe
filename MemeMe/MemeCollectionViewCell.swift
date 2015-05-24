@@ -1,6 +1,6 @@
 import UIKit
 
-class MemeCollectionViewCell: UICollectionViewCell
+class MemeCollectionViewCell : UICollectionViewCell
 {
     @IBOutlet weak var imageView: UIImageView!
 }

@@ -1,7 +1,6 @@
-import Foundation
 import UIKit
 
-class MemeSentMemesViewController: UIViewController, UICollectionViewDataSource, UITableViewDataSource
+class MemeSentMemesViewController : UIViewController, UICollectionViewDataSource, UITableViewDataSource
 {
     var memes:[Meme]!
     var currentMemesCount:Int = 0
@@ -31,9 +30,11 @@ class MemeSentMemesViewController: UIViewController, UICollectionViewDataSource,
     
     func plusButtonTapped(sender:AnyObject)
     {
-        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("MemeEditorViewController") as! MemeEditorViewController
+        let vc = self.storyboard?.instantiateViewControllerWithIdentifier(CONTROLLER_IDENTIFIER_MEME_EDITOR) as! MemeEditorViewController
         self.presentViewController(vc, animated: true, completion: nil)
     }
+    
+    // MARK: UICollectionViewDataSource
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
@@ -42,7 +43,7 @@ class MemeSentMemesViewController: UIViewController, UICollectionViewDataSource,
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
     {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("MemeCollectionViewCell", forIndexPath:indexPath) as! MemeCollectionViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(COLLECTION_VIEW_CELL_REUSE_ID, forIndexPath:indexPath) as! MemeCollectionViewCell
         let meme = self.memes[indexPath.row]
         cell.imageView?.image = meme.memedImage
         return cell
@@ -50,10 +51,12 @@ class MemeSentMemesViewController: UIViewController, UICollectionViewDataSource,
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath:NSIndexPath)
     {
-        let memeDetailViewController = self.storyboard!.instantiateViewControllerWithIdentifier("MemeDetailViewController") as! MemeDetailViewController
+        let memeDetailViewController = self.storyboard!.instantiateViewControllerWithIdentifier(CONTROLLER_IDENTIFIER_MEME_DETAIL) as! MemeDetailViewController
         memeDetailViewController.meme = self.memes[indexPath.row]
         self.navigationController!.pushViewController(memeDetailViewController, animated: true)
     }
+    
+    // MARK: UITableViewDataSource
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
@@ -62,7 +65,7 @@ class MemeSentMemesViewController: UIViewController, UICollectionViewDataSource,
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCellWithIdentifier("MemeTableViewCell") as! MemeTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(TABLE_VIEW_CELL_REUSE_ID) as! MemeTableViewCell
         let meme = self.memes[indexPath.row]
         
         // Set the name and image
@@ -74,7 +77,7 @@ class MemeSentMemesViewController: UIViewController, UICollectionViewDataSource,
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
-        let memeDetailViewController = self.storyboard!.instantiateViewControllerWithIdentifier("MemeDetailViewController") as! MemeDetailViewController
+        let memeDetailViewController = self.storyboard!.instantiateViewControllerWithIdentifier(CONTROLLER_IDENTIFIER_MEME_DETAIL) as! MemeDetailViewController
         memeDetailViewController.meme = self.memes[indexPath.row]
         self.navigationController!.pushViewController(memeDetailViewController, animated: true)
     }

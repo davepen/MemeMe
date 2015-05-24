@@ -146,7 +146,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="89o-z4-NuF">
             <objects>
-                <tabBarController storyboardIdentifier="SentMemesView" id="alv-bA-sL5" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="MemeSentViewController" id="alv-bA-sL5" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="JW4-zw-MvZ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
