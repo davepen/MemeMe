@@ -1,5 +1,11 @@
 import UIKit
 
+/**
+*   Class that maintains a meme. Stores the top text, bottom text image and
+    the memed image. This started as a struct, but when I need to store the memes
+    array to NSUserDefaults, I had to change it to a class so I could implement
+    NSCoding. This was needed so I could store the memes array object.
+*/
 class Meme : NSObject, NSCoding
 {
     var topText:String?

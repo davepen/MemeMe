@@ -1,5 +1,8 @@
 import UIKit
 
+/**
+*  Handles the meme editor
+*/
 class MemeEditorViewController : UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate
 {
     @IBOutlet weak var imageView: UIImageView!
@@ -14,9 +17,11 @@ class MemeEditorViewController : UIViewController, UIImagePickerControllerDelega
     {
         super.viewDidLoad()
         
+        // disable any buttons that may need to be
         self.shareButton.enabled = false
         self.cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
         
+        // setup the text for the two text fields we'll use
         let memeTextAttributes = [
             NSStrokeColorAttributeName : UIColor.blackColor(),
             NSForegroundColorAttributeName : UIColor.whiteColor(),
@@ -34,6 +39,8 @@ class MemeEditorViewController : UIViewController, UIImagePickerControllerDelega
         bottomTextField.delegate = self
     }
     
+    // MARK: Overrides
+
     override func prefersStatusBarHidden() -> Bool
     {
         return true;
@@ -51,6 +58,8 @@ class MemeEditorViewController : UIViewController, UIImagePickerControllerDelega
         self.unsubscribeFromKeyboardNotifications()
     }
     
+    // MARK: IBAction
+
     @IBAction func pickAnImageFromAlbum(sender: AnyObject)
     {
         let imagePicker = UIImagePickerController()
@@ -79,6 +88,7 @@ class MemeEditorViewController : UIViewController, UIImagePickerControllerDelega
         let activity = UIActivityViewController(activityItems: [meme.memedImage!], applicationActivities: nil)
         activity.completionWithItemsHandler = {
             (activity, success, items, error) in
+            // left this println here to see what was being returned each time
             println("Activity: \(activity) Success: \(success) Items: \(items) Error: \(error)")
             
             if (success)
@@ -89,6 +99,8 @@ class MemeEditorViewController : UIViewController, UIImagePickerControllerDelega
         self.presentViewController(activity, animated: true, completion: nil)
     }
     
+    // MARK: Keyboard Notifications
+
     func subscribeToKeyboardNotifications()
     {
         NSNotificationCenter.defaultCenter().addObserver(self,
@@ -130,6 +142,8 @@ class MemeEditorViewController : UIViewController, UIImagePickerControllerDelega
         return keyboardSize.CGRectValue().height
     }
     
+    // MARK: UIImagePickerControllerDelegate
+    
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject])
     {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage
@@ -147,6 +161,11 @@ class MemeEditorViewController : UIViewController, UIImagePickerControllerDelega
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    // MARK: Supporting Methods
+    
+    /**
+    Saves the meme to a meme object and store it in our global array
+    */
     func save()
     {
         let memedImage = self.generateMemedImage()
@@ -185,6 +204,9 @@ class MemeEditorViewController : UIViewController, UIImagePickerControllerDelega
         return memedImage
     }
     
+    /**
+    Hitting return on the keyboard will dismiss it
+    */
     func textFieldShouldReturn(textField: UITextField) -> Bool
     {
         textField.resignFirstResponder()

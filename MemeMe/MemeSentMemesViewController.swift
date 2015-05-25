@@ -1,13 +1,22 @@
 import UIKit
 
+/**
+*   Handles the sent memes view. This class is a datasource for both the collection view and table view.
+*   Initially, I had two separate view controllers: one for the collection view and one for the table view,
+*   but the code was nearly identical, so I moved to using just this one view controller.
+*/
 class MemeSentMemesViewController : UIViewController, UICollectionViewDataSource, UITableViewDataSource
 {
     var memes:[Meme]!
+
+    // used to determine when we should refresh the table view and collection view
     var currentMemesCount:Int = 0
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var collectionView: UICollectionView!
     
+    // MARK: Overrides
+
     override func viewWillAppear(animated:Bool)
     {
         super.viewWillAppear(animated)
