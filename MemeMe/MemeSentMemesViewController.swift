@@ -21,61 +21,61 @@ class MemeSentMemesViewController : UIViewController, UICollectionViewDataSource
     {
         super.viewWillAppear(animated)
         memes = AppDelegate.getMemes()
-        if self.currentMemesCount < memes.count
+        if currentMemesCount < memes.count
         {
-            self.currentMemesCount = memes.count
-            self.tableView?.reloadData()
-            self.collectionView?.reloadData()
+            currentMemesCount = memes.count
+            tableView?.reloadData()
+            collectionView?.reloadData()
         }
     }
     
     override func viewDidLoad()
     {
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem:UIBarButtonSystemItem.Add,
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem:UIBarButtonSystemItem.Add,
             target:self,
             action:Selector("plusButtonTapped:"))
-        self.currentMemesCount = AppDelegate.getMemes().count
+        currentMemesCount = AppDelegate.getMemes().count
     }
     
     func plusButtonTapped(sender:AnyObject)
     {
-        let vc = self.storyboard?.instantiateViewControllerWithIdentifier(CONTROLLER_IDENTIFIER_MEME_EDITOR) as! MemeEditorViewController
-        self.presentViewController(vc, animated: true, completion: nil)
+        let memeEditorViewController = storyboard?.instantiateViewControllerWithIdentifier(controllerIdentifierMemeEditor) as! MemeEditorViewController
+        presentViewController(memeEditorViewController, animated: true, completion: nil)
     }
     
     // MARK: UICollectionViewDataSource
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
-        return self.memes.count
+        return memes.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
     {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(COLLECTION_VIEW_CELL_REUSE_ID, forIndexPath:indexPath) as! MemeCollectionViewCell
-        let meme = self.memes[indexPath.row]
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(collectionViewCellReuseId, forIndexPath:indexPath) as! MemeCollectionViewCell
+        let meme = memes[indexPath.row]
         cell.imageView?.image = meme.memedImage
         return cell
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath:NSIndexPath)
     {
-        let memeDetailViewController = self.storyboard!.instantiateViewControllerWithIdentifier(CONTROLLER_IDENTIFIER_MEME_DETAIL) as! MemeDetailViewController
-        memeDetailViewController.meme = self.memes[indexPath.row]
-        self.navigationController!.pushViewController(memeDetailViewController, animated: true)
+        let memeDetailViewController = storyboard!.instantiateViewControllerWithIdentifier(controllerIdentifierMemeDetail) as! MemeDetailViewController
+        memeDetailViewController.meme = memes[indexPath.row]
+        navigationController!.pushViewController(memeDetailViewController, animated: true)
     }
     
     // MARK: UITableViewDataSource
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return self.memes.count
+        return memes.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCellWithIdentifier(TABLE_VIEW_CELL_REUSE_ID) as! MemeTableViewCell
-        let meme = self.memes[indexPath.row]
+        let cell = tableView.dequeueReusableCellWithIdentifier(tableViewCellReuseId) as! MemeTableViewCell
+        let meme = memes[indexPath.row]
         
         // Set the name and image
         cell.memeCellLabel?.text = meme.topText! + meme.bottomText!
@@ -86,9 +86,9 @@ class MemeSentMemesViewController : UIViewController, UICollectionViewDataSource
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
-        let memeDetailViewController = self.storyboard!.instantiateViewControllerWithIdentifier(CONTROLLER_IDENTIFIER_MEME_DETAIL) as! MemeDetailViewController
-        memeDetailViewController.meme = self.memes[indexPath.row]
-        self.navigationController!.pushViewController(memeDetailViewController, animated: true)
+        let memeDetailViewController = storyboard!.instantiateViewControllerWithIdentifier(controllerIdentifierMemeDetail) as! MemeDetailViewController
+        memeDetailViewController.meme = memes[indexPath.row]
+        navigationController!.pushViewController(memeDetailViewController, animated: true)
     }
     
 }

@@ -18,8 +18,8 @@ class MemeEditorViewController : UIViewController, UIImagePickerControllerDelega
         super.viewDidLoad()
         
         // disable any buttons that may need to be
-        self.shareButton.enabled = false
-        self.cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
+        shareButton.enabled = false
+        cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
         
         // setup the text for the two text fields we'll use
         let memeTextAttributes = [
@@ -49,13 +49,13 @@ class MemeEditorViewController : UIViewController, UIImagePickerControllerDelega
     override func viewWillAppear(animated: Bool)
     {
         super.viewWillAppear(animated)
-        self.subscribeToKeyboardNotifications()
+        subscribeToKeyboardNotifications()
     }
     
     override func viewWillDisappear(animated: Bool)
     {
         super.viewWillDisappear(animated)
-        self.unsubscribeFromKeyboardNotifications()
+        unsubscribeFromKeyboardNotifications()
     }
     
     // MARK: IBAction
@@ -65,7 +65,7 @@ class MemeEditorViewController : UIViewController, UIImagePickerControllerDelega
         let imagePicker = UIImagePickerController()
         imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
         imagePicker.delegate = self
-        self.presentViewController(imagePicker, animated: true, completion: nil)
+        presentViewController(imagePicker, animated: true, completion: nil)
     }
     
     @IBAction func pickAnImageFromCamera(sender: AnyObject)
@@ -73,17 +73,16 @@ class MemeEditorViewController : UIViewController, UIImagePickerControllerDelega
         let imagePicker = UIImagePickerController()
         imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
         imagePicker.delegate = self
-        self.presentViewController(imagePicker, animated: true, completion: nil)
+        presentViewController(imagePicker, animated: true, completion: nil)
     }
 
     @IBAction func cancelButtonTapped(sender: UIBarButtonItem)
     {
-        self.dismissViewControllerAnimated(true, completion: nil);
+        dismissViewControllerAnimated(true, completion: nil);
     }
     
     @IBAction func shareButtonTapped(sender: UIBarButtonItem)
     {
-        self.save()
         let meme = (UIApplication.sharedApplication().delegate as! AppDelegate).memes.last! as Meme
         let activity = UIActivityViewController(activityItems: [meme.memedImage!], applicationActivities: nil)
         activity.completionWithItemsHandler = {
@@ -93,10 +92,11 @@ class MemeEditorViewController : UIViewController, UIImagePickerControllerDelega
             
             if (success)
             {
+                self.save()
                 self.dismissViewControllerAnimated(true, completion: nil);
             }
         }
-        self.presentViewController(activity, animated: true, completion: nil)
+        presentViewController(activity, animated: true, completion: nil)
     }
     
     // MARK: Keyboard Notifications
@@ -123,7 +123,7 @@ class MemeEditorViewController : UIViewController, UIImagePickerControllerDelega
     {
         if bottomTextField.isFirstResponder()
         {
-            self.view.frame.origin.y += getKeyboardHeight(notification)
+            view.frame.origin.y += getKeyboardHeight(notification)
         }
     }
     
@@ -131,7 +131,7 @@ class MemeEditorViewController : UIViewController, UIImagePickerControllerDelega
     {
         if bottomTextField.isFirstResponder()
         {
-            self.view.frame.origin.y -= getKeyboardHeight(notification)
+            view.frame.origin.y -= getKeyboardHeight(notification)
         }
     }
     
@@ -148,17 +148,17 @@ class MemeEditorViewController : UIViewController, UIImagePickerControllerDelega
     {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage
         {
-            self.imageView.image = image
-            self.shareButton.enabled = true
-            self.topTextField.enabled = true
-            self.bottomTextField.enabled = true
-            self.dismissViewControllerAnimated(true, completion: nil)
+            imageView.image = image
+            shareButton.enabled = true
+            topTextField.enabled = true
+            bottomTextField.enabled = true
+            dismissViewControllerAnimated(true, completion: nil)
         }
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController)
     {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
     // MARK: Supporting Methods
@@ -168,7 +168,7 @@ class MemeEditorViewController : UIViewController, UIImagePickerControllerDelega
     */
     func save()
     {
-        let memedImage = self.generateMemedImage()
+        let memedImage = generateMemedImage()
         let meme = Meme()
         meme.topText = topTextField.text!
         meme.bottomText = bottomTextField.text!
@@ -188,18 +188,18 @@ class MemeEditorViewController : UIViewController, UIImagePickerControllerDelega
     func generateMemedImage() -> UIImage
     {
         // hide the toolbar and navigation bar
-        self.toolbar.hidden = true
-        self.navigationBar.hidden = true
+        toolbar.hidden = true
+        navigationBar.hidden = true
         
         // render view to an image
-        UIGraphicsBeginImageContext(self.view.frame.size)
-        self.view.drawViewHierarchyInRect(self.view.frame, afterScreenUpdates: true)
+        UIGraphicsBeginImageContext(view.frame.size)
+        view.drawViewHierarchyInRect(view.frame, afterScreenUpdates: true)
         let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
 
         // unhide the tooolbar and navigation bar
-        self.toolbar.hidden = false
-        self.navigationBar.hidden = false
+        toolbar.hidden = false
+        navigationBar.hidden = false
 
         return memedImage
     }

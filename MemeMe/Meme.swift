@@ -20,22 +20,22 @@ class Meme : NSObject, NSCoding
     
     func encodeWithCoder(encoder:NSCoder) -> Void
     {
-        if let topText = self.topText
+        if let topText = topText
         {
             encoder.encodeObject(topText, forKey:NSCODER_KEY_TOP_TEXTFIELD)
         }
         
-        if let bottomText = self.bottomText
+        if let bottomText = bottomText
         {
             encoder.encodeObject(bottomText, forKey:NSCODER_KEY_BOTTOM_TEXTFIELD)
         }
         
-        if let image = self.image
+        if let image = image
         {
             encoder.encodeObject(image, forKey:NSCODER_KEY_IMAGE)
         }
         
-        if let memedImage = self.memedImage
+        if let memedImage = memedImage
         {
             encoder.encodeObject(memedImage, forKey:NSCODER_KEY_MEMED_IMAGE)
         }
@@ -43,9 +43,9 @@ class Meme : NSObject, NSCoding
     
     required init(coder aDecoder:NSCoder)
     {
-        self.topText = aDecoder.decodeObjectForKey(NSCODER_KEY_TOP_TEXTFIELD) as? String
-        self.bottomText = aDecoder.decodeObjectForKey(NSCODER_KEY_BOTTOM_TEXTFIELD) as? String
-        self.image = aDecoder.decodeObjectForKey(NSCODER_KEY_IMAGE) as? UIImage
-        self.memedImage = aDecoder.decodeObjectForKey(NSCODER_KEY_MEMED_IMAGE) as? UIImage
+        topText = aDecoder.decodeObjectForKey(NSCODER_KEY_TOP_TEXTFIELD) as? String
+        bottomText = aDecoder.decodeObjectForKey(NSCODER_KEY_BOTTOM_TEXTFIELD) as? String
+        image = aDecoder.decodeObjectForKey(NSCODER_KEY_IMAGE) as? UIImage
+        memedImage = aDecoder.decodeObjectForKey(NSCODER_KEY_MEMED_IMAGE) as? UIImage
     }
 }

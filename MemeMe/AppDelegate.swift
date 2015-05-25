@@ -11,18 +11,18 @@ class AppDelegate : UIResponder, UIApplicationDelegate
         // load our memes
         self.loadMemes()
 
-        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        window = UIWindow(frame: UIScreen.mainScreen().bounds)
         let mainstoryboard = UIStoryboard(name:"Main", bundle:nil);
         
         // app always shows the sent memes view controller
-        self.window?.rootViewController = mainstoryboard.instantiateViewControllerWithIdentifier(CONTROLLER_IDENTIFIER_MEME_SENT) as? UITabBarController
-        self.window?.makeKeyAndVisible()
+        window?.rootViewController = mainstoryboard.instantiateViewControllerWithIdentifier(controllerIndetifierMemeSent) as? UITabBarController
+        window?.makeKeyAndVisible()
         
-        if (self.memes.count == 0)
+        if (memes.count == 0)
         {
             // but present the meme editor view when we don't yet have any sent memes
-            let vc = mainstoryboard.instantiateViewControllerWithIdentifier(CONTROLLER_IDENTIFIER_MEME_EDITOR) as! MemeEditorViewController
-            self.window?.rootViewController?.presentViewController(vc, animated: true, completion: nil);
+            let memeEditorViewController = mainstoryboard.instantiateViewControllerWithIdentifier(controllerIdentifierMemeEditor) as! MemeEditorViewController
+            window?.rootViewController?.presentViewController(memeEditorViewController, animated: true, completion: nil);
         }
 
         return true
@@ -30,12 +30,12 @@ class AppDelegate : UIResponder, UIApplicationDelegate
 
     func applicationWillResignActive(application: UIApplication)
     {
-        self.saveMemes()
+        saveMemes()
     }
 
     func applicationWillTerminate(application: UIApplication)
     {
-        self.saveMemes()
+        saveMemes()
     }
     
     /**
@@ -43,13 +43,13 @@ class AppDelegate : UIResponder, UIApplicationDelegate
     */
     func loadMemes()
     {
-        let memesData = NSUserDefaults.standardUserDefaults().objectForKey(MEMES_ARRAY_KEY) as? NSData
+        let memesData = NSUserDefaults.standardUserDefaults().objectForKey(memesArrayKey) as? NSData
         if let memesData = memesData
         {
             let memesArray = NSKeyedUnarchiver.unarchiveObjectWithData(memesData) as? [Meme]
             if let memesArray = memesArray
             {
-                self.memes = memesArray
+                memes = memesArray
             }
         }
     }
@@ -60,7 +60,7 @@ class AppDelegate : UIResponder, UIApplicationDelegate
     func saveMemes() -> Void
     {
         let memesData = NSKeyedArchiver.archivedDataWithRootObject(memes)
-        NSUserDefaults.standardUserDefaults().setObject(memesData, forKey:MEMES_ARRAY_KEY)
+        NSUserDefaults.standardUserDefaults().setObject(memesData, forKey:memesArrayKey)
         NSUserDefaults.standardUserDefaults().synchronize()
     }
 }
