@@ -76,11 +76,7 @@ class MemeSentMemesViewController : UIViewController, UICollectionViewDataSource
     {
         let cell = tableView.dequeueReusableCellWithIdentifier(tableViewCellReuseId) as! MemeTableViewCell
         let meme = memes[indexPath.row]
-        
-        // Set the name and image
-        cell.memeCellLabel?.text = meme.topText! + meme.bottomText!
         cell.memeCellImageView?.image = meme.memedImage
-        
         return cell
     }
     
