@@ -9,7 +9,7 @@ class AppDelegate : UIResponder, UIApplicationDelegate
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
     {
         // load our memes
-        self.loadMemes()
+        loadMemes()
 
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         let mainstoryboard = UIStoryboard(name:"Main", bundle:nil);

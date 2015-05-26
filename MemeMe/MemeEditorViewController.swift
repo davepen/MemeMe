@@ -83,8 +83,11 @@ class MemeEditorViewController : UIViewController, UIImagePickerControllerDelega
     
     @IBAction func shareButtonTapped(sender: UIBarButtonItem)
     {
-        let meme = (UIApplication.sharedApplication().delegate as! AppDelegate).memes.last! as Meme
-        let activity = UIActivityViewController(activityItems: [meme.memedImage!], applicationActivities: nil)
+        // generate a memed image that we can pass to the activity view controller,
+        // but lets not save anything unless the activity controller gets success
+        let memedImage = generateMemedImage()
+        
+        let activity = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
         activity.completionWithItemsHandler = {
             (activity, success, items, error) in
             // left this println here to see what was being returned each time
@@ -92,6 +95,7 @@ class MemeEditorViewController : UIViewController, UIImagePickerControllerDelega
             
             if (success)
             {
+                // success. now lets call save and dismiss
                 self.save()
                 self.dismissViewControllerAnimated(true, completion: nil);
             }
@@ -123,7 +127,7 @@ class MemeEditorViewController : UIViewController, UIImagePickerControllerDelega
     {
         if bottomTextField.isFirstResponder()
         {
-            view.frame.origin.y += getKeyboardHeight(notification)
+            view.frame.origin.y = 0
         }
     }
     
